@@ -85,7 +85,6 @@ public class DateUtilTest {
 
 	@Test
 	public void testIncrementDay() {
-		// Test incrementing a valid date
 		DateUtil date = new DateUtil(31, 12, 2020);
 		date.increment();
 		Assert.assertEquals(1, date.getDay());
@@ -95,7 +94,6 @@ public class DateUtilTest {
 
 	@Test
 	public void testDecrementDay() {
-		// Test decrementing a valid date
 		DateUtil date = new DateUtil(1, 1, 2021);
 		date.decrement();
 		Assert.assertEquals(31, date.getDay());
