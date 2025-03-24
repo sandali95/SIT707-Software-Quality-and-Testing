@@ -1,16 +1,18 @@
 package sit707_tasks;
 
-import java.util.Random;
-
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-
+import org.junit.rules.ExpectedException;
 
 /**
  * @author Ahsan Habib
  */
 public class DateUtilTest {
-	
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
 	@Test
 	public void testStudentIdentity() {
 		String studentId = "224390537";
@@ -35,12 +37,9 @@ public class DateUtilTest {
 	@Test
 	public void testInvalidDayInFebruaryNonLeapYear() {
 		// Invalid date: 29th February 2021 (not a leap year)
-		try{
-			new DateUtil(29, 2, 2021);
-			Assert.fail("Expected RuntimeException for 29-02-2021");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid day: 29, max day: 28");
+		new DateUtil(29, 2, 2021);
 	}
 
 	@Test
@@ -55,12 +54,9 @@ public class DateUtilTest {
 	@Test
 	public void testInvalidDayIn30DayMonth() {
 		// Invalid date: 31st April 2020 (April has only 30 days)
-		try{
-			new DateUtil(31, 4, 2020);
-			Assert.fail("Expected RuntimeException for 31-04-2020");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid day: 31, max day: 30");
+		new DateUtil(31, 4, 2020);
 	}
 
 	@Test
@@ -75,12 +71,9 @@ public class DateUtilTest {
 	@Test
 	public void testInvalidDayInFebruary() {
 		// Invalid date: 30th February 2020 (February never has 30 days)
-		try{
-			new DateUtil(30, 2, 2020);
-			Assert.fail("Expected RuntimeException for day 30-02-2020");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid day: 30, max day: 29");
+		new DateUtil(30, 2, 2020);
 	}
 
 	@Test
@@ -103,64 +96,43 @@ public class DateUtilTest {
 
 	@Test
 	public void testInvalidYearBelowRange() {
-		try{
-			new DateUtil(1,1,1699);
-			Assert.fail("Expected RuntimeException for year 1699");
-		}catch (Exception ex){
-			Assert.assertEquals(RuntimeException.class,ex.getClass());
-		}
-
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid year: 1699, expected range 1700-2024");
+		new DateUtil(1, 1, 1699);
 	}
 
 	@Test
 	public void testInvalidYearAboveRange() {
-		try{
-			new DateUtil(1, 1, 2025);
-			Assert.fail("Expected RuntimeException for year 2025");
-		}catch (Exception ex){
-			Assert.assertEquals(RuntimeException.class,ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid year: 2025, expected range 1700-2024");
+		new DateUtil(1, 1, 2025);
 	}
 
 	@Test
 	public void testInvalidMonthBelowRange() {
-		try{
-			new DateUtil(1, 0, 2025);
-			Assert.fail("Expected RuntimeException for month 0");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid month: 0, expected range 1-12");
+		new DateUtil(1, 0, 2025);
 	}
 
 	@Test
 	public void testInvalidMonthAboveRange() {
-		try{
-			new DateUtil(1, 13, 2025);
-			Assert.fail("Expected RuntimeException for month 13");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid month: 13, expected range 1-12");
+		new DateUtil(1, 13, 2025);
 	}
 
 	@Test
 	public void testInvalidDayBelowRange() {
-		try{
-			new DateUtil(0, 1, 2025);
-			Assert.fail("Expected RuntimeException for day 0");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid day: 0, expected range 1-31");
+		new DateUtil(0, 1, 2025);
 	}
 
 	@Test
 	public void testInvalidDayAboveRange() {
-		try{
-			new DateUtil(32, 1, 2025);
-			Assert.fail("Expected RuntimeException for day 32");
-		}catch (Exception ex) {
-			Assert.assertEquals(RuntimeException.class, ex.getClass());
-		}
+		thrown.expect(RuntimeException.class);
+		thrown.expectMessage("Invalid day: 32, expected range 1-31");
+		new DateUtil(32, 1, 2025);
 	}
-	
-
 }
