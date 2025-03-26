@@ -1,4 +1,4 @@
-package sit707_week2;
+package sit707_week4;
 
 import org.junit.After;
 import org.junit.Assert;
