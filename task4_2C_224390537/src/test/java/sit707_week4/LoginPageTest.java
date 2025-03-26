@@ -61,7 +61,7 @@ public class LoginPageTest {
     @Test
     public void testEmptyEmail() {
         driver.findElement(By.id("username")).sendKeys("");
-        driver.findElement(By.id("password")).sendKeys("");
+        driver.findElement(By.id("password")).sendKeys("test");
         driver.findElement(By.id("login-submit")).click();
 
         WebElement spanElement = wait.until(ExpectedConditions
@@ -69,6 +69,26 @@ public class LoginPageTest {
         Assert.assertEquals("Error message should match",
                 "This field is required",
                 spanElement.getText());
+        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
+    }
+
+    @Test
+    public void testEmptyEmailAndEmptyPassword() {
+        driver.findElement(By.id("username")).sendKeys("");
+        driver.findElement(By.id("password")).sendKeys("");
+        driver.findElement(By.id("login-submit")).click();
+
+        WebElement userSpanElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.id("username-error-message")));
+        Assert.assertEquals("Error message should match",
+                "This field is required",
+                userSpanElement.getText());
+
+        WebElement passSpanElement = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.id("password-error-message")));
+        Assert.assertEquals("Error message should match",
+                "This field is required",
+                passSpanElement.getText());
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
