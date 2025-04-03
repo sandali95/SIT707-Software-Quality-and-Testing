@@ -9,24 +9,9 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class WeatherControllerTest {
-
     private static WeatherController wController;
 
     private static Instant fixedInstant;
-
-
-
-    @Test
-    public void testStudentIdentity() {
-        String studentId = "224390537";
-        Assert.assertNotNull("Student ID is null", studentId);
-    }
-
-    @Test
-    public void testStudentName() {
-        String studentName = "Sandali Samarawickrama";
-        Assert.assertNotNull("Student name is null", studentName);
-    }
 
     @BeforeClass
     public static void init() {
@@ -39,6 +24,18 @@ public class WeatherControllerTest {
     @AfterClass
     public static void cleanup() {
         wController.close();
+    }
+
+    @Test
+    public void testStudentIdentity() {
+        String studentId = "224390537";
+        Assert.assertNotNull("Student ID is null", studentId);
+    }
+
+    @Test
+    public void testStudentName() {
+        String studentName = "Sandali Samarawickrama";
+        Assert.assertNotNull("Student name is null", studentName);
     }
 
     @Test
