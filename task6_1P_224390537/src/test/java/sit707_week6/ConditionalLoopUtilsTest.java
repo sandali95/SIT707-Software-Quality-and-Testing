@@ -17,7 +17,7 @@ public class ConditionalLoopUtilsTest {
 
     @Test
     public void testSumUpToFive() {
-        Assert.assertEquals(15, ConditionalLoopUtils.sumUpTo(5)); // 1+2+3+4+5
+        Assert.assertEquals(15, ConditionalLoopUtils.sumUpTo(5));
     }
 
     @Test
@@ -32,11 +32,11 @@ public class ConditionalLoopUtilsTest {
 
     @Test
     public void testCountEvenFive() {
-        Assert.assertEquals(2, ConditionalLoopUtils.countEvenNumbers(5)); // evens: 2, 4
+        Assert.assertEquals(2, ConditionalLoopUtils.countEvenNumbers(5));
     }
 
     @Test
     public void testCountEvenTen() {
-        Assert.assertEquals(5, ConditionalLoopUtils.countEvenNumbers(10)); // evens: 2,4,6,8,10
+        Assert.assertEquals(5, ConditionalLoopUtils.countEvenNumbers(10));
     }
 }
