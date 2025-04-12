@@ -143,4 +143,25 @@ public class DateUtilDecrementTest {
         Assert.assertEquals(14, date.getDay());
         Assert.assertEquals(2024, date.getYear());
     }
+
+    @Test
+    public void test14B() {
+        DateUtil date = new DateUtil(1, 3, 1996);
+        System.out.println("March01_1996ShouldDecrementToFebruary29_1996 > " + date);
+        date.decrement();
+        System.out.println(date);
+        Assert.assertEquals(2, date.getMonth());
+        Assert.assertEquals(29, date.getDay());
+    }
+
+    @Test
+    public void test15B() {
+        DateUtil date = new DateUtil(1, 3, 2021);
+        System.out.println("March01_2021ShouldDecrementToFebruary28_2021 > " + date);
+        date.decrement();
+        System.out.println(date);
+        Assert.assertEquals(2, date.getMonth());
+        Assert.assertEquals(28, date.getDay());
+    }
+
 }

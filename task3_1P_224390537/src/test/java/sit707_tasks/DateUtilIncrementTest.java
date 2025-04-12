@@ -141,4 +141,46 @@ public class DateUtilIncrementTest {
         Assert.assertEquals(6, date.getMonth()); // June
         Assert.assertEquals(16, date.getDay());
     }
+
+    @Test
+    public void test14B() {
+        DateUtil date = new DateUtil(28, 2, 1996);
+        System.out.println("February28_1996ShouldIncrementToFebruary29_1996 > " + date);
+        date.increment();
+        System.out.println(date);
+        Assert.assertEquals(2, date.getMonth());
+        Assert.assertEquals(29, date.getDay());
+    }
+
+    @Test
+    public void test15B() {
+        DateUtil date = new DateUtil(29, 2, 1996);
+        System.out.println("February29_1996ShouldIncrementToMarch01_1996 > " + date);
+        date.increment();
+        System.out.println(date);
+        Assert.assertEquals(3, date.getMonth());
+        Assert.assertEquals(1, date.getDay());
+    }
+
+    @Test
+    public void test16B() {
+        DateUtil date = new DateUtil(28, 2, 2021);
+        System.out.println("February28_2021ShouldIncrementToMarch01_2021 > " + date);
+        date.increment();
+        System.out.println(date);
+        Assert.assertEquals(3, date.getMonth());
+        Assert.assertEquals(1, date.getDay());
+    }
+
+    @Test
+    public void test17B() {
+        try {
+            DateUtil date = new DateUtil(29, 2, 1994);
+            System.out.println("February29ShouldThrowException > " + date);
+
+            Assert.fail("Expected RuntimeException was not thrown");
+        } catch (RuntimeException ex) {
+            Assert.assertEquals("Invalid day: 29, max day: 28",ex.getMessage());
+        }
+    }
 }
