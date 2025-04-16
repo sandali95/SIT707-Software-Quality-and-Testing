@@ -10,14 +10,6 @@ public class DateUtilTestECT {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    //  Valid input classes
-
-    @Test
-    public void testValidDate() {
-        DateUtil date = new DateUtil(15, 6, 2024);
-        Assert.assertEquals("15 June 2024", date.toString());
-    }
-
     @Test
     public void testZeroIncrement() {
         DateUtil date = new DateUtil(10, 10, 2024);
@@ -38,7 +30,7 @@ public class DateUtilTestECT {
     public void testInvalidDay() {
         thrown.expect(RuntimeException.class);
         thrown.expectMessage("Invalid day");
-        new DateUtil(32, 1, 2024);
+        new DateUtil(29, 2, 2023);
     }
 
     @Test

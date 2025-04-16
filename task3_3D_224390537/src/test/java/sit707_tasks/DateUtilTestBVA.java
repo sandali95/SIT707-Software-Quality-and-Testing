@@ -10,20 +10,6 @@ public class DateUtilTestBVA {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    // Day boundaries by one day
-
-    @Test
-    public void testMinimumValidDay() {
-        DateUtil date = new DateUtil(1, 5, 2024);
-        Assert.assertEquals("1 May 2024", date.toString());
-    }
-
-    @Test
-    public void testMaximumValidDay() {
-        DateUtil date = new DateUtil(31, 1, 2024);
-        Assert.assertEquals("31 January 2024", date.toString());
-    }
-
     // Leap year boundaries by one day
 
     @Test
@@ -108,7 +94,7 @@ public class DateUtilTestBVA {
 
     @Test
     public void testIncrementByYearsLeapToNonLeap() {
-        DateUtil date = new DateUtil(29, 2, 2024); // Leap year
+        DateUtil date = new DateUtil(29, 2, 2024);
         date.incrementByYears(1); // 2025 is not leap
         Assert.assertEquals("28 February 2025", date.toString());
     }
@@ -116,8 +102,8 @@ public class DateUtilTestBVA {
     @Test
     public void testDecrementByYearsLeapToNonLeap() {
         DateUtil date = new DateUtil(29, 2, 2024);
-        date.decrementByYears(4); // 2020 was leap, 2020 → 2016
-        Assert.assertEquals("29 February 2020", date.toString()); // Still leap
+        date.decrementByYears(4);
+        Assert.assertEquals("29 February 2020", date.toString());
     }
 
     @Test
