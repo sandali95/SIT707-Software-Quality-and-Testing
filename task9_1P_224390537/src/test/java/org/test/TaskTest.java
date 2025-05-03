@@ -12,8 +12,8 @@ public class TaskTest {
 
     @Before
     public void setUp() {
-        futureDate = new Date(System.currentTimeMillis() + 86400000); // Tomorrow
-        pastDate = new Date(System.currentTimeMillis() - 86400000); // Yesterday
+        futureDate = new Date(System.currentTimeMillis() + 86400000);
+        pastDate = new Date(System.currentTimeMillis() - 86400000);
         currentDate = new Date();
     }
 
