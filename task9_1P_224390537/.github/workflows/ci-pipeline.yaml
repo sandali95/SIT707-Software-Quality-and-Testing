@@ -1,10 +1,14 @@
-name: Build and Notify
+name: Build and Notify (Subfolder Workflow)
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'task9_1P_224390537/**'  # Path relative to repo root
   pull_request:
     branches: [ main ]
+    paths:
+      - 'task9_1P_224390537/**'
 
 jobs:
   build:
@@ -12,6 +16,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set working directory
+        run: |
+          cd task9_1P_224390537
+          echo "WORKING_DIR=$(pwd)" >> $GITHUB_ENV
+          echo "Current directory: $(pwd)"
+          ls -la  # For debugging
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -21,9 +34,11 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
+        working-directory: ${{ env.WORKING_DIR }}
         run: mvn -B package --file pom.xml
 
       - name: Test with Maven
+        working-directory: ${{ env.WORKING_DIR }}
         run: mvn -B test --file pom.xml
 
       - name: Send email notification
@@ -34,14 +49,13 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Build Status: ${{ job.status }} - ${{ github.repository }}"
+          subject: "task9_1P_224390537 Build: ${{ job.status }} - ${{ github.repository }}"
           to: ${{ secrets.NOTIFICATION_EMAIL }}
           from: GitHub Actions
           body: |
-            Build job ${{ github.job }} completed with status: ${{ job.status }}
+            Build completed for subfolder: your-subfolder
+            Status: ${{ job.status }}
             
-            Repository: ${{ github.repository }}
-            Branch: ${{ github.ref }}
             Commit: ${{ github.sha }}
-            
-            View the logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            Workflow file location: .github/workflows/build.yml
+            View logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
